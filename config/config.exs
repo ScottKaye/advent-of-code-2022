@@ -1,30 +1,18 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-use Mix.Config
+import Config
 
-# This configuration is loaded before any dependency and is restricted
-# to this project. If another project depends on this project, this
-# file won't be loaded nor affect the parent project. For this reason,
-# if you want to provide default values for your application for
-# 3rd-party users, it should be done in your "mix.exs" file.
+config :advent_of_code, AdventOfCode.Input,
+  # allow_network?: true,
+  session_cookie: System.get_env("ADVENT_OF_CODE_SESSION_COOKIE")
 
-# You can configure your application as:
+# If you don't like environment variables, put your cookie in
+# a `config/secrets.exs` file like this:
 #
-#     config :advent_of_code_2018, key: :value
-#
-# and access this configuration in your application as:
-#
-#     Application.get_env(:advent_of_code_2018, :key)
-#
-# You can also configure a 3rd-party app:
-#
-#     config :logger, level: :info
-#
+# import Config
+# config :advent_of_code, AdventOfCode.Input,
+#   session_cookie: "..."
 
-# It is also possible to import configuration files, relative to this
-# directory. For example, you can emulate configuration per environment
-# by uncommenting the line below and defining dev.exs, test.exs and such.
-# Configuration from the imported file will override the ones defined
-# here (which is why it is important to import them last).
-#
-#     import_config "#{Mix.env()}.exs"
+try do
+  import_config "secrets.exs"
+rescue
+  _ -> :ok
+end
