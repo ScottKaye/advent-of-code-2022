@@ -1,6 +1,6 @@
 defmodule AdventOfCode.Day01 do
   def part1(_args) do
-    File.read!("input/d01")
+    AdventOfCode.Input.get!(1, 2023)
     |> String.replace(~r/[^\d\n]/, "")
     |> String.split("\n", trim: true)
     |> Enum.map(fn str ->
@@ -9,7 +9,6 @@ defmodule AdventOfCode.Day01 do
     |> Enum.sum()
   end
 
-  # correct result: 53221
   defp find_first_number(str) do
     [result] =
       Regex.run(~r/(\d|one|two|three|four|five|six|seven|eight|nine)/, str, capture: :first)
@@ -46,8 +45,9 @@ defmodule AdventOfCode.Day01 do
     |> String.to_integer()
   end
 
+  # correct result: 53221
   def part2(_args) do
-    File.read!("input/d01")
+    AdventOfCode.Input.get!(1, 2023)
     |> String.split("\n", trim: true)
     |> Enum.map(&find_number/1)
     |> Enum.sum()
