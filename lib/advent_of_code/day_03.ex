@@ -138,17 +138,8 @@ defmodule AdventOfCode.Day03 do
       cell = get_cell(matrix, x, y)
 
       cond do
-        String.length(cell) == 0 ->
-          nil
-
-        cell == "." ->
-          nil
-
         cell == "*" ->
           find_adjacent_numbers(matrix, x, y)
-
-        _ = Regex.run(~r/\d/, cell) ->
-          nil
 
         true ->
           nil
@@ -156,8 +147,7 @@ defmodule AdventOfCode.Day03 do
     end
     |> Enum.reject(&is_nil/1)
     |> Enum.map(fn i ->
-      i
-      |> Enum.map(fn j -> get_number_from_range(matrix, j) end)
+      Enum.map(i, fn j -> get_number_from_range(matrix, j) end)
     end)
     |> Enum.filter(&(length(&1) == 2))
     |> Enum.map(fn [a, b] ->
